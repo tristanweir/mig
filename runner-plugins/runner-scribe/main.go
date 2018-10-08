@@ -147,7 +147,8 @@ func makeVulnerability(initems []gozdef.VulnEvent, cmd mig.Command) (items []goz
 				newevent.Asset.Owner.V2Bkey = newevent.Asset.Owner.Operator
 			}
 			if newevent.Asset.Owner.Team != "" {
-				newevent.Asset.Owner.V2Bkey += "-" + newevent.Asset.Owner.Team
+				//newevent.Asset.Owner.V2Bkey += "-" + newevent.Asset.Owner.Team
+				newevent.Asset.Owner.V2Bkey += "-" + ownerFromHostname(assethostname)
 			}
 		}
 		// Always set credentialed checks here
@@ -248,4 +249,9 @@ func normalizeRisk(in string) string {
 		return "critical"
 	}
 	return in
+}
+
+//query ServiceAPI with a hostname, return the team that owns the system
+func ownerFromHostname(hostname string) string {
+	return ""
 }
